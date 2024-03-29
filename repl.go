@@ -17,8 +17,45 @@ func startRepl() {
 		text := scanner.Text()
 
 		cleaned := cleanInput(text)
+		if len(cleaned) == 0 {
+			continue
+		}
+		commandName := cleaned[0]
 
-		fmt.Println("echoing: ", cleaned)
+		availableCommands := getCommands()
+
+		command, ok := availableCommands[commandName]
+		if !ok {
+			fmt.Println("Invalid command")
+			continue
+		}
+		command.callback()
+	}
+}
+
+type cliCommand struct {
+	name        string
+	description string
+	callback    func() error
+}
+
+func getCommands() map[string]cliCommand {
+	return map[string]cliCommand{
+		"help": {
+			name:        "help",
+			description: "Displays a help menu",
+			callback:    callbackHelp,
+		},
+		"map": {
+			name:        "map",
+			description: "Lists some location areas",
+			callback:    callbackMap,
+		},
+		"exit": {
+			name:        "exit",
+			description: "Exits the Pokedex",
+			callback:    callbackExit,
+		},
 	}
 }
 
