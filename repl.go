@@ -11,7 +11,7 @@ func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
-		fmt.Print("Pokedex > ")
+		fmt.Print("Pokemon > ")
 
 		scanner.Scan()
 		text := scanner.Text()
@@ -77,6 +77,11 @@ func getCommands() map[string]cliCommand {
 			name:        "inspect {pokemon_name}",
 			description: "View information about a caught pokemon",
 			callback:    callbackInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "View all of the pokemon in your pokedex",
+			callback:    callbackPokedex,
 		},
 		"exit": {
 			name:        "exit",

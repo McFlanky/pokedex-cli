@@ -19,13 +19,14 @@ func callbackCatch(cfg *config, args ...string) error {
 
 	const threshold = 50
 	randNum := rand.Intn(pokemon.BaseExperience)
-	fmt.Printf("Throwing a pokeball at %s...\n", pokemon.Name)
-	fmt.Println(pokemon.BaseExperience, randNum, threshold)
+	fmt.Printf("Throwing a Pokeball at %s...\n", pokemon.Name)
+	// fmt.Println(pokemon.BaseExperience, randNum, threshold)
 	if randNum > threshold {
 		return fmt.Errorf("%s escaped, NO WAY!", pokemon.Name)
 	}
 
 	cfg.caughtPokemon[pokemonName] = pokemon
 	fmt.Printf("%s was caught!\n", pokemon.Name)
+	fmt.Println("You can check it out with the inspect command")
 	return nil
 }
