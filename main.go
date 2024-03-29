@@ -1,6 +1,17 @@
 package main
 
-func main() {
+import "github.com/McFlanky/pokedex-cli/internal/pokeapi"
 
-	startRepl()
+type config struct {
+	pokeapiClient       pokeapi.Client
+	nextLocationAreaURL *string
+	prevLocationAreaURL *string
+}
+
+func main() {
+	cfg := config{
+		pokeapiClient: pokeapi.NewClient(),
+	}
+
+	startRepl(&cfg)
 }
